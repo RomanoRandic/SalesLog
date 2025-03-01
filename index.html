@@ -14,11 +14,11 @@
         <input type="text" id="ime"><br>
         <label for="odabirTrgovine">Choose a store:</label>
         <select id="odabirTrgovine">
-            <option value="elipso">Elipso</option>
-            <option value="emmezeta">Emmezeta</option>
-            <option value="sancta_domenica">Sancta Domenica</option>
-            <option value="svijet_medija">Svijet Medija</option>
-            <option value="pevex">Pevex</option>
+            <option value="Elipso">Elipso</option>
+            <option value="Emmezeta">Emmezeta</option>
+            <option value="Sancta Domenica">Sancta Domenica</option>
+            <option value="Svijet Medija">Svijet Medija</option>
+            <option value="Pevex">Pevex</option>
         </select>
         <label for="city">City:</label>
             <select id="city" >
@@ -80,6 +80,7 @@
             <select id="time">
                 <option value="">Select Time</option>
                 <option value="am/pm">am/pm</option>
+                <opttion value ="pm">pm</opttion>
             </select>
             <label for="date">Date:</label>
             <input type="date" id="date" name="birthday">
@@ -96,7 +97,9 @@
             
 
     </form>
-    <button type="button" onclick="saveFormData()">Stisni</button>
+    <button type="button" onclick="saveFormData(event)">Spremi podatke</button>
+   <a href = "log.html"> <button type="button" >Nastavi</button></a>
+
     <div class="selection-display" id="result">
         Please select options from all dropdowns to see the result.
     </div>
