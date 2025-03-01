@@ -121,6 +121,7 @@ function exportToExcel() {
   const year = formData.year;
   const week = formData.week;
   const hour = formData.hours;
+  const date = formData.date;
 
   // Check if any value is missing in localStorage
 
@@ -136,6 +137,7 @@ function exportToExcel() {
     week: week,
     hours: hour,
     type: sale.type,
+    date:date,
     kind: sale.kind,
     code: sale.code,
     quantity: sale.quantity,
