@@ -27,3 +27,7 @@ function saveFormData(event) {
     // Optionally, display form data in the result div
     document.getElementById("result").textContent = JSON.stringify(formData, null, 2);
 }
+function posaljiDalje(){
+    window.location.href = "log.html";
+
+}

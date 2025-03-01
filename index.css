@@ -1,8 +1,14 @@
 body {
     font-family: Arial, sans-serif;
-    max-width: 800px;
+    max-width: 300px;
     margin: 0 auto;
     padding: 20px;
+    display: grid;
+    grid-column: 300px;
+}
+form{
+    display:grid;
+    grid-column:300px;
 }
 .container {
     display: flex;
@@ -15,6 +21,7 @@ body {
     gap: 20px;
 }
 select, input {
+    margin-bottom: 10px;
     padding: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
@@ -22,6 +29,7 @@ select, input {
     min-width: 200px;
 }
 label {
+    margin-bottom: 10px;
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
@@ -39,4 +47,25 @@ label {
 .disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+.button {
+    background-color: #007BFF; /* Primary blue */
+    color: white; /* White text */
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 10px 0px 10px 0px;
+}
+
+.button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.button:active {
+    background-color: #004494;
+    transform: scale(0.98); /* Slightly shrink when clicked */
 }

@@ -10,8 +10,8 @@
 </head>
 <body>
     <form>
-        <label>Ime i prezime promotra </label><b>
-        <input type="text" id="ime"><br>
+        <label>Ime i prezime promotra </label>
+        <input type="text" id="ime">
         <label for="odabirTrgovine">Choose a store:</label>
         <select id="odabirTrgovine">
             <option value="Elipso">Elipso</option>
@@ -80,7 +80,7 @@
             <select id="time">
                 <option value="">Select Time</option>
                 <option value="am/pm">am/pm</option>
-                <opttion value ="pm">pm</opttion>
+                <option value ="pm">pm</opttion>
             </select>
             <label for="date">Date:</label>
             <input type="date" id="date" name="birthday">
@@ -97,9 +97,8 @@
             
 
     </form>
-    <button type="button" onclick="saveFormData(event)">Spremi podatke</button>
-   <a href = "log.html"> <button type="button" >Nastavi</button></a>
-
+    <button type="button" class= "button" onclick="saveFormData(event)">Spremi podatke</button>
+    <button class= "button" type="button" onclick="posaljiDalje()" >Nastavi</button>
     <div class="selection-display" id="result">
         Please select options from all dropdowns to see the result.
     </div>
