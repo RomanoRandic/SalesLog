@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.dropdown-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+select, input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    min-width: 200px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.selection-display {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+.invalid {
+    border: 2px solid red !important;
+}
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

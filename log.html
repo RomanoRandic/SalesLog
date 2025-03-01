@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="log.css">
+
+<title>Sales Logging App</title>
+  
+</head>
+<body>
+
+<h2>Sales Logging App</h2>
+
+<label>Code:</label>
+<input type="text" id="codeInput" placeholder="Enter item code">
+
+<label>Quantity:</label>
+<input type="number" id="quantityInput" placeholder="Quantity">
+
+<label>Price:</label>
+<input type="number" id="priceInput" placeholder="Price">
+
+<button onclick="logSale()">Log Sale</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Specific Kind</th>
+      <th>Code</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Time Logged</th>
+    </tr>
+  </thead>
+  <tbody id="salesTable"></tbody>
+</table>
+
+<script src="log.js"></script>
+
+</body>
+</html>
