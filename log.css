@@ -47,3 +47,19 @@ body {
     background-color: #004494;
     transform: scale(0.98); /* Slightly shrink when clicked */
 }
+
+.deleteButton {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 10px;
+  cursor: pointer;
+  margin-left: 6px;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #c0392b;
+}

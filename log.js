@@ -17,8 +17,6 @@ function getTypeFromCode(code) {
     "CA": "COFFE",
     "EP": "COFFE",
     "NA": "KITCHEN APPLIANCES"
-
-
     // Add more mappings as needed
   };
   return typeMap[firstLetter] || "Other";
@@ -50,10 +48,9 @@ function getSpecificKind(code) {
 // Function to log a sale
 function logSale() {
   const code = document.getElementById("codeInput").value.trim().toUpperCase();
-  const quantity = document.getElementById("quantityInput").value;
   const price = document.getElementById("priceInput").value;
 
-  if (!code || !quantity || !price) {
+  if (!code || !price) {
     alert("Please enter all fields!");
     return;
   }
@@ -63,20 +60,36 @@ function logSale() {
   // If the sale already exists in the log, add a new timestamp and update the quantity
   if (salesLog[code]) {
     salesLog[code].timestamps.push(timestamp);  // Add the timestamp to the array
-    salesLog[code].quantity = parseInt(salesLog[code].quantity) + parseInt(quantity); // Update quantity
+    salesLog[code].quantity++; // Update quantity
   } else {
-
     // If item is new, add it to the log
     salesLog[code] = {
       type: getTypeFromCode(code),
       kind: getSpecificKind(code),
       code: code,
-      quantity: quantity,
+      quantity: 1,
       price: price,
       timestamps: [timestamp]
     };
   }
 
+  renderTable();
+}
+
+// Function to delete a specific timestamp entry
+function deleteTimestamp(code, timestampIndex) {
+  const sale = salesLog[code];
+  
+  // If this is the only timestamp, delete the entire entry
+  if (sale.timestamps.length === 1) {
+    delete salesLog[code];
+  } else {
+    // Remove the specific timestamp
+    sale.timestamps.splice(timestampIndex, 1);
+    // Decrease quantity by 1
+    sale.quantity = parseInt(sale.quantity) - 1;
+  }
+  
   renderTable();
 }
 
@@ -89,31 +102,59 @@ function renderTable() {
     const sale = salesLog[code];
     const row = document.createElement("tr");
 
+    // Create the timestamps cell with delete buttons
+    const timestampsCell = document.createElement("td");
+    timestampsCell.className = "timestamp-list";
+    
+    sale.timestamps.forEach((timestamp, index) => {
+      const timestampDiv = document.createElement("div");
+      timestampDiv.style.display = "flex";
+      timestampDiv.style.alignItems = "center";
+      timestampDiv.style.marginBottom = "5px";
+      
+      const timestampSpan = document.createElement("span");
+      timestampSpan.textContent = timestamp;
+      
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.className = "deleteButton";
+
+      deleteButton.onclick = function() {
+        deleteTimestamp(code, index);
+      };
+      
+      timestampDiv.appendChild(timestampSpan);
+      timestampDiv.appendChild(deleteButton);
+      timestampsCell.appendChild(timestampDiv);
+    });
+
     row.innerHTML = `
       <td>${sale.type}</td>
       <td>${sale.kind}</td>
       <td>${sale.code}</td>
       <td>${sale.quantity}</td>
       <td>${sale.price}</td>
-      <td class="timestamp-list">${sale.timestamps.join("<br>")}</td>
     `;
-
+    
+    // Append the timestamps cell with delete buttons
+    row.appendChild(timestampsCell);
     tableBody.appendChild(row);
   }
 }
+
 // Function to export data to Excel
 function exportToExcel() {
   const formDataFromStorage = localStorage.getItem('formData');
   if (formDataFromStorage) {
       const formData = JSON.parse(formDataFromStorage);
       console.log('Retrieved form data:', formData);
+      console.log(formData.typeOfPromotion);
   } else {
       console.log('No form data found in localStorage');
   }
   const formData = JSON.parse(formDataFromStorage);
   // Retrieve values from localStorage
   const promotor = formData.ime;
-  console.log(formData.ime);
   const store = formData.store;
   const city = formData.city;
   const region = formData.region;
@@ -122,9 +163,7 @@ function exportToExcel() {
   const week = formData.week;
   const hour = formData.hours;
   const date = formData.date;
-
-  // Check if any value is missing in localStorage
-
+  const typeOfPromotion = formData.typeOfPromotion;
 
   // Prepare sales data
   const salesData = Object.values(salesLog).map(sale => ({
@@ -135,14 +174,15 @@ function exportToExcel() {
     month: month,
     year: year,
     week: week,
+    date: date,
+    typeOfPromotion: typeOfPromotion,
     hours: hour,
     type: sale.type,
-    date:date,
     kind: sale.kind,
     code: sale.code,
     quantity: sale.quantity,
     price: sale.price,
-    timestamps: sale.timestamps.join(', ')// Export timestamps as newline-separated
+    timestamps: sale.timestamps.join(', ') // Export timestamps as comma-separated
   }));
 
   // Create Excel sheet
