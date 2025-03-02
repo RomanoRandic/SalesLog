@@ -63,16 +63,16 @@ function logSale() {
     salesLog[code].quantity++; // Update quantity
   } else {
     // If item is new, add it to the log
-    salesLog[code] = {
-      type: getTypeFromCode(code),
-      kind: getSpecificKind(code),
-      code: code,
-      quantity: 1,
-      price: price,
-      timestamps: [timestamp]
-    };
-  }
-
+      salesLog[code] = {
+        type: getTypeFromCode(code),
+        kind: getSpecificKind(code),
+        code: code,
+        quantity: 1,
+        price: price,
+        timestamps: [timestamp]
+      };
+    }
+  
   renderTable();
 }
 
@@ -129,8 +129,8 @@ function renderTable() {
     });
 
     row.innerHTML = `
-      <td>${sale.type}</td>
-      <td>${sale.kind}</td>
+      <td class="phone">${sale.type}</td>
+      <td class="phone">${sale.kind}</td>
       <td>${sale.code}</td>
       <td>${sale.quantity}</td>
       <td>${sale.price}</td>
@@ -176,7 +176,7 @@ function exportToExcel() {
     week: week,
     date: date,
     typeOfPromotion: typeOfPromotion,
-    hours: hour,
+    hours: index === 0 ? hour : "",
     type: sale.type,
     kind: sale.kind,
     code: sale.code,
