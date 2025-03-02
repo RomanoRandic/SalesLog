@@ -166,24 +166,30 @@ function exportToExcel() {
   const typeOfPromotion = formData.typeOfPromotion;
 
   // Prepare sales data
-  const salesData = Object.values(salesLog).map(sale => ({
-    promotor: promotor,
-    store: store,
-    city: city,
-    region: region,
-    month: month,
-    year: year,
-    week: week,
-    date: date,
-    typeOfPromotion: typeOfPromotion,
-    hours: index === 0 ? hour : "",
-    type: sale.type,
-    kind: sale.kind,
-    code: sale.code,
-    quantity: sale.quantity,
-    price: sale.price,
-    timestamps: sale.timestamps.join(', ') // Export timestamps as comma-separated
-  }));
+  let isFirstRow = true;
+  const salesData = Object.values(salesLog).map(sale => {
+    const rowData = {
+      promotor: promotor,
+      store: store,
+      city: city,
+      region: region,
+      month: month,
+      year: year,
+      week: week,
+      date: date,
+      typeOfPromotion: typeOfPromotion,
+      hours: isFirstRow ? hour : "", // Include hours only in the first row
+      type: sale.type,
+      kind: sale.kind,
+      code: sale.code,
+      quantity: sale.quantity,
+      price: sale.price,
+      timestamps: sale.timestamps.join(', ') // Export timestamps as comma-separated
+    };
+    
+    isFirstRow = false; // Set to false after first row
+    return rowData;
+  });
 
   // Create Excel sheet
   const worksheet = XLSX.utils.json_to_sheet(salesData);
